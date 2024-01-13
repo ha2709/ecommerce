@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 import uuid
 from src.models.base import Base
 from src.models.customer_category import CustomerCategory
-
+from src.models.order_threshold import OrderThreshold
  
 
 class Customer(Base):
@@ -19,9 +19,9 @@ class Customer(Base):
     
     # Categorization logic
     def categorize(self):
-        if 0 <= self.successful_orders <= 20:
+        if 0 <= self.successful_orders <= OrderThreshold.TWENTY.value:
             return CustomerCategory.BRONZE
-        elif 21 <= self.successful_orders <= 49:
+        elif OrderThreshold.TWENTY.value < self.successful_orders <= OrderThreshold.FIFTY.value:
             return CustomerCategory.SILVER
         else:
             return CustomerCategory.GOLD

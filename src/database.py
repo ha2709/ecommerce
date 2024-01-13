@@ -39,6 +39,7 @@ from src.models.discount import Discount
 from src.models.order_item import OrderItem
 from src.models.product_category import ProductCategory
 from src.models.shopping_cart import ShoppingCart
+from src.models.order_threshold import OrderThreshold
 
 # Create the tables
 Base.metadata.create_all(bind=engine)

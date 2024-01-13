@@ -66,6 +66,7 @@ For example, the send_verification_email function is responsible for sending ema
 # Dependency injection:
 The parameter `db` is being injected into the `verify_user` function using FastAPI's dependency injection mechanism. This is a form of Dependency Injection, which is an architectural pattern used to manage and provide dependencies to components of an application. It helps in decoupling the code and making it more modular and testable
 
+schedule the `categorize_customers.py` function to run periodically, such as daily or weekly, to update customer categories based on their order history.
 
 `uvicorn src.main:app --reload`
 
