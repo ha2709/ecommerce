@@ -9,7 +9,7 @@ from src.models.token import VerificationToken
 load_dotenv()
 # DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
 DATABASE_URL = os.environ.get("DATABASE_URL")
-print(12, DATABASE_URL)
+# print(12, DATABASE_URL)
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

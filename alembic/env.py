@@ -24,7 +24,7 @@ from src.models.product_category import ProductCategory
 from src.models.shopping_cart import ShoppingCart
  
 
-print(12, User, Base)
+ 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
