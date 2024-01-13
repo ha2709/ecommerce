@@ -33,13 +33,13 @@ from src.models.order import Order
 from src.models.shopping_cart_item import ShoppingCartItem
 from src.models.token import VerificationToken
 from src.models.cart import CartItem
-from src.models.customer_category import CustomerCategory
+ 
 from src.models.customer import Customer
 from src.models.discount import Discount
 from src.models.order_item import OrderItem
 from src.models.product_category import ProductCategory
 from src.models.shopping_cart import ShoppingCart
-from src.models.order_threshold import OrderThreshold
+ 
 
 # Create the tables
 Base.metadata.create_all(bind=engine)

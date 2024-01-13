@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from src.models.customer import Customer, CustomerCategory
 from src.models.order import Order
-from src.models.order_threshold import OrderThreshold
+from models.order_threshold import OrderThreshold
 
 def categorize_customers(db: Session):
     # Query all customers

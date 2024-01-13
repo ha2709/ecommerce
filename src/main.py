@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from sqlalchemy.orm import Session
-from src.database import SessionLocal
-from src.routers import user
+ 
+from routers import user_router, product_router, discount_router, customer_router
 import subprocess
  
 app = FastAPI()
@@ -21,6 +20,7 @@ def run_scheduler():
         return {"message": f"Scheduler failed: {str(e)}"}
 
 # Include  user router
-app.include_router(user.router, prefix="/users")
- 
-
+app.include_router(user_router.router, prefix="/users")
+app.include_router(product_router.router, prefix="/products")
+app.include_router(discount_router.router, prefix="/discounts")
+app.include_router(customer_router.router, prefix="/customers")
