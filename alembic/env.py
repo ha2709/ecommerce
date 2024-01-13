@@ -14,6 +14,7 @@ from src.models.department import Department
 from src.models.order import Order
 from src.models.product import Product
 from src.models.shopping_cart import ShoppingCartItem
+from src.models.token import VerificationToken
 
 print(12, User, Base)
 # this is the Alembic Config object, which provides

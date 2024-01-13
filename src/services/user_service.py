@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from src.models.user import User as UserModel   
-from src.schemas.user import UserCreate       # Import your UserCreate schema
+from src.schemas.user import UserCreate      
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -15,5 +15,4 @@ def create_user(db: Session, user: UserCreate) -> UserModel:
     db.refresh(db_user)
     return db_user
 
-# Mock database to store verification tokens (replace with your database)
-verification_tokens = {}
+ 

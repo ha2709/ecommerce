@@ -44,6 +44,29 @@ Functionality: Both registered and unregistered customers can view products, add
 - This document serves as a preliminary guide for the development team.
 - Further specifications and technical details will be provided in subsequent documentation.
 
+I use a common architectural pattern known as "Separation of Concerns." This pattern is about organizing code in a way that separates different responsibilities into distinct modules or functions.
+
+Here's how the code relates to the Separation of Concerns pattern:
+
+# 1.  Responsibility Separation  : 
+The code separates different responsibilities into different sections or functions. For example:
+
+- Registration and email verification logic are encapsulated in the /users/ and /verify/ endpoints.
+- Database-related operations are handled by the create_user function and the use of the database session.
+# 2. Modularity: 
+The code is organized into functions and modules that focus on specific tasks:
+
+- The /users/ endpoint handles user registration and sends verification emails.
+- The /verify/ endpoint handles email verification.
+- Database operations are separated into the create_user function.
+- Email sending functionality is encapsulated in the send_verification_email function.
+# 3.  Single Responsibility Principle: 
+Each function or module has a single responsibility. 
+For example, the send_verification_email function is responsible for sending emails, and the /users/ endpoint is responsible for user registration.
+# Dependency injection:
+The parameter `db` is being injected into the `verify_user` function using FastAPI's dependency injection mechanism. This is a form of Dependency Injection, which is an architectural pattern used to manage and provide dependencies to components of an application. It helps in decoupling the code and making it more modular and testable
+
+
 `uvicorn src.main:app --reload`
 
 `alembic revision --autogenerate -m "create_relationship"`
