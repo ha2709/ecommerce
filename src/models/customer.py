@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
 from src.models.base import Base
-from models.customer_category import CustomerCategory
+from src.models.customer_category import CustomerCategory
 
  
 

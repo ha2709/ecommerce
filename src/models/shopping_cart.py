@@ -1,10 +1,6 @@
 
 from typing import List, Optional
-from sqlalchemy import Column, Integer, ForeignKey
-from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.postgresql import UUID
-import uuid
-from src.models.base import Base
+
 from src.models.shopping_cart_item import ShoppingCartItem
 
 class ShoppingCart:

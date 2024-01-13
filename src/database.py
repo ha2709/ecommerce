@@ -30,9 +30,15 @@ from src.models.user import User
 from src.models.department import Department
 from src.models.product import Product
 from src.models.order import Order
-from src.models.shopping_cart import ShoppingCartItem
+from src.models.shopping_cart_item import ShoppingCartItem
 from src.models.token import VerificationToken
-
+from src.models.cart import CartItem
+from src.models.customer_category import CustomerCategory
+from src.models.customer import Customer
+from src.models.discount import Discount
+from src.models.order_item import OrderItem
+from src.models.product_category import ProductCategory
+from src.models.shopping_cart import ShoppingCart
 
 # Create the tables
 Base.metadata.create_all(bind=engine)

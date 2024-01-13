@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, ForeignKey, Enum
+from sqlalchemy import Column,  Float, ForeignKey, Enum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid

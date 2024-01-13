@@ -1,8 +1,8 @@
 # src/models/token.py
 
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship
+ 
 import uuid
 from src.models.base import Base
 

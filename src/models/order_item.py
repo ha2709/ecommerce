@@ -1,10 +1,9 @@
-from sqlalchemy import Column, String, Float, ForeignKey, Integer
+from sqlalchemy import Column,  Float, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
 from src.models.base import Base
-from src.models.customer import Customer
-from src.models.shopping_cart import ShoppingCartItem
+ 
 
 class OrderItem(Base):
     __tablename__ = 'order_items'
