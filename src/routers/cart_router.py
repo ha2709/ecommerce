@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.database import get_db
 from src.models.shopping_cart import ShoppingCart as DBShoppingCart
-from src.models.user import User
+from src.models.shopping_cart_item import ShoppingCartItem 
 from src.schemas.shopping_cart import ShoppingCart, ShoppingCartItemCreate, ShoppingCartItemUpdate
+from src.models.user import User
 from src.utils.auth import get_current_user
 
 router = APIRouter()
@@ -55,7 +56,7 @@ def add_product_to_shopping_cart(
         existing_item.quantity += item.quantity
     else:
         # Add the new item to the shopping cart
-        db_shopping_cart.items.append(DBShoppingCart(**item.dict(), shopping_cart=db_shopping_cart))
+        db_shopping_cart.items.append(ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart))
 
     db.commit()
 

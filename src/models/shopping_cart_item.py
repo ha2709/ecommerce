@@ -9,5 +9,10 @@ class ShoppingCartItem(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     product_id = Column(UUID(as_uuid=True), ForeignKey('products.id'))
     quantity = Column(Integer)
+    shopping_cart_id = Column(UUID(as_uuid=True), ForeignKey('shopping_carts.id'))  # Add this line
 
-    product = relationship('Product')
+    # Define a relationship with the Product model
+    product = relationship('Product', back_populates='shopping_cart_items')
+
+    # Define a relationship with the ShoppingCart model
+    shopping_cart = relationship('ShoppingCart', back_populates='items')
