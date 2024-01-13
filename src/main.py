@@ -1,6 +1,6 @@
 from fastapi import FastAPI
  
-from routers import user_router, product_router, discount_router, customer_router
+from src.routers import user_router, product_router, discount_router, customer_router, cart_router, order_router
 import subprocess
  
 app = FastAPI()
@@ -24,3 +24,5 @@ app.include_router(user_router.router, prefix="/users")
 app.include_router(product_router.router, prefix="/products")
 app.include_router(discount_router.router, prefix="/discounts")
 app.include_router(customer_router.router, prefix="/customers")
+app.include_router(cart_router.router, prefix="/cart")
+app.include_router(order_router.router, prefix="/order")
