@@ -6,14 +6,12 @@ class UserCreate(BaseModel):
     password: str
 
 # User schema for outgoing data (e.g., for responses)
-class User(BaseModel):
-    id: int
+class UserResponse(BaseModel):
+    id: str
     email: EmailStr
 
     class Config:
         orm_mode = True  # Allows the model to work with ORM objects
 
 
-class UserResponse(BaseModel):
-    id: str  # UUID as a string
-    email: str
+ 

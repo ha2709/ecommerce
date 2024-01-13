@@ -14,3 +14,6 @@ def create_user(db: Session, user: UserCreate) -> UserModel:
     db.commit()
     db.refresh(db_user)
     return db_user
+
+# Mock database to store verification tokens (replace with your database)
+verification_tokens = {}

@@ -3,6 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv 
+from sqlalchemy.orm import Session
+from src.models.token import VerificationToken
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 load_dotenv()
 DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
@@ -25,3 +27,11 @@ from src.models.shopping_cart import ShoppingCartItem
 
 # Create the tables
 Base.metadata.create_all(bind=engine)
+
+
+def create_verification_token(db: Session, email: str, token: str):
+    db_token = VerificationToken(email=email, token=token)
+    db.add(db_token)
+    db.commit()
+    db.refresh(db_token)
+    return db_token
