@@ -12,3 +12,7 @@ class Order(Base):
     total_price = Column(Float)
 
     user = relationship('User', back_populates='orders')
+    # Define a one-to-many relationship with OrderItem model (order_items)
+    order_items = relationship('OrderItem', back_populates='order')
+    # Define a relationship with the Customer model (optional)
+    customer = relationship('Customer', back_populates='orders')
