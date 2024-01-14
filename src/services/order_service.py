@@ -8,13 +8,13 @@ from src.models.customer import Customer
 from src.models.product_category import ProductCategory
 from src.schemas.order import OrderItemCreate
 from sqlalchemy.orm import Session
-from src.database import get_db
+from src.database import get_async_db
 from typing import List
 
 def calculate_total_price(
     order_items: List[OrderItemCreate], 
     customer: Customer,
-    db: Session = Depends(get_db), 
+    db: Session = Depends(get_async_db), 
     ):
     total_price = 0.0
 
@@ -38,7 +38,7 @@ def calculate_total_price(
 def get_discount_percentage(
     product_category: ProductCategory,
     customer: Customer, 
-    db: Session = Depends(get_db)):
+    db: Session = Depends(get_async_db)):
     # Query the discounts table to get the discount percentage based on customer category and product category
     discount = db.query(Discount).filter_by(
         customer_category=customer.category,

@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
@@ -10,17 +11,18 @@ load_dotenv()
 # DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
 DATABASE_URL = os.environ.get("DATABASE_URL")
 # print(12, DATABASE_URL)
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# engine = create_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, echo=True)
+AsyncSessionFactory = sessionmaker(
+    engine, expire_on_commit=False, class_=AsyncSession
+)
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 # Dependency to get the database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def get_async_db():
+    async with AsyncSessionFactory() as session:
+        yield session
 
 
 # Import all modules here that might define models so that
