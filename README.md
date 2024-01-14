@@ -74,6 +74,10 @@ I use Asynchoronous paradigm for these benefits:
 
 schedule the `categorize_customers.py` function to run periodically, such as daily or weekly, to update customer categories based on their order history.
 
+`python3 -m venv env`
+
+`source env/bin/activate`
+
 `uvicorn src.main:app --reload`
 
 `alembic revision --autogenerate -m "create_relationship"`

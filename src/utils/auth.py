@@ -18,6 +18,19 @@ ALGORITHM = os.getenv("ALGORITHM")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_async_db)) -> User:
+    """
+    Retrieve the current user based on the JWT token and database session.
+
+    Args:
+    - token (str): JWT token obtained from the OAuth2PasswordBearer.
+    - db (AsyncSession): SQLAlchemy AsyncSession for database access.
+
+    Returns:
+    - User: User model instance of the authenticated user.
+
+    Raises:
+    - HTTPException: If the token is invalid, expired, or the user is not found.
+    """
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("sub")

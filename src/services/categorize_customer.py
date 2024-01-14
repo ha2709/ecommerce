@@ -1,21 +1,20 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 from src.models.customer import Customer, CustomerCategory
 from src.models.order import Order
 from models.order_threshold import OrderThreshold
 
-def categorize_customers(db: Session):
-    # Query all customers
-    customers = db.query(Customer).all()
+async def categorize_customers(db: AsyncSession):
+    # Asynchronously query all customers
+    result = await db.execute(select(Customer))
+    customers = result.scalars().all()
 
     for customer in customers:
-        # Calculate the number of successful orders (you need to implement this logic)
-        successful_orders_count = calculate_successful_orders_count(db, customer)
+        # Calculate the number of successful orders asynchronously
+        successful_orders_count = await calculate_successful_orders_count(db, customer.id)
 
         # Determine the current category
         current_category = customer.categorize()
-
- 
-
         # Check if the category needs to be updated
         if successful_orders_count > OrderThreshold.FIFTY.value and current_category != CustomerCategory.GOLD:
             customer.successful_orders = successful_orders_count
@@ -27,16 +26,14 @@ def categorize_customers(db: Session):
             customer.successful_orders = successful_orders_count
             customer.user.customer_category = CustomerCategory.BRONZE
 
+    # Asynchronously commit the changes to the database
+    await db.commit()
 
-    # Commit the changes to the database
-    db.commit()
-
-
-def calculate_successful_orders_count(db: Session, customer_id: str) -> int:
-    # Query the database to retrieve successful orders for the customer
-    successful_orders_count = (
-        db.query(Order)
+async def calculate_successful_orders_count(db: AsyncSession, customer_id: str) -> int:
+    # Asynchronously query the database to retrieve successful orders for the customer
+    result = await db.execute(
+        select(Order)
         .filter(Order.user_id == customer_id, Order.status == 'successful')
-        .count()
     )
-    return successful_orders_count
+    successful_orders = result.scalars().all()
+    return len(successful_orders)

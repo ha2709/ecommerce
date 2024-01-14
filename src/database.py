@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
 from src.models.token import VerificationToken
-
+import asyncio
  
 load_dotenv()
 # DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
@@ -34,7 +34,7 @@ from src.models.product import Product
 from src.models.order import Order
 from src.models.shopping_cart_item import ShoppingCartItem
 from src.models.token import VerificationToken
-from src.models.cart import CartItem
+ 
  
 from src.models.customer import Customer
 from src.models.discount import Discount
@@ -42,6 +42,12 @@ from src.models.order_item import OrderItem
 from src.models.product_category import ProductCategory
 from src.models.shopping_cart import ShoppingCart
  
-
-# Create the tables
-Base.metadata.create_all(bind=engine)
+async def create_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+# If there's an existing event loop, use it to run the coroutine
+loop = asyncio.get_event_loop()
+if loop.is_running():
+    loop.create_task(create_tables())
+else:
+    asyncio.run(create_tables())

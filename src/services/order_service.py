@@ -1,49 +1,40 @@
 from typing import List
-from fastapi import  Depends
+from fastapi import Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 from src.models.product import Product
 from src.models.customer import Customer
 from src.models.discount import Discount
-
-from src.models.customer import Customer
 from src.models.product_category import ProductCategory
 from src.schemas.order import OrderItemCreate
-from sqlalchemy.orm import Session
-from src.database import get_async_db
-from typing import List
+from src.database import get_async_db  # Adjust this import according to your project structure
 
-def calculate_total_price(
+async def calculate_total_price(
     order_items: List[OrderItemCreate], 
     customer: Customer,
-    db: Session = Depends(get_async_db), 
-    ):
+    db: AsyncSession = Depends(get_async_db)):
     total_price = 0.0
 
-    # Iterate through the order items
     for order_item in order_items:
-        product = db.query(Product).filter_by(id=order_item.product_id).first()
+        result = await db.execute(select(Product).filter_by(id=order_item.product_id))
+        product = result.scalars().first()
 
         if product:
-            # Calculate the original price of the product
             original_price = product.price
-
-            # Apply discounts based on customer category and product category
-            discount_percentage = get_discount_percentage(db, customer, product.category)
+            discount_percentage = await get_discount_percentage(product.category, customer, db)
             discounted_price = calculate_discounted_price(original_price, discount_percentage)
-
-            # Add the discounted price to the total
             total_price += discounted_price * order_item.quantity
 
     return total_price
 
-def get_discount_percentage(
+async def get_discount_percentage(
     product_category: ProductCategory,
     customer: Customer, 
-    db: Session = Depends(get_async_db)):
-    # Query the discounts table to get the discount percentage based on customer category and product category
-    discount = db.query(Discount).filter_by(
+    db: AsyncSession = Depends(get_async_db)):
+    result = await db.execute(select(Discount).filter_by(
         customer_category=customer.category,
-        product_category_id=product_category.id
-    ).first()
+        product_category_id=product_category.id))
+    discount = result.scalars().first()
 
     if discount:
         return discount.percentage
@@ -51,6 +42,4 @@ def get_discount_percentage(
         return 0.0
 
 def calculate_discounted_price(original_price, discount_percentage):
-    return original_price - (original_price * discount_percentage)
-
-# You can then use this `calculate_total_price` function in the order creation endpoint.
+    return original_price - (original_price * discount_percentage / 100)

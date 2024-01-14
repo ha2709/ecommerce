@@ -16,8 +16,8 @@ scheduler.configure(jobstores=jobstore, executors=executors)
 
 # Define the function you want to schedule
 def categorize_customers_job():
-    with get_async_db() as db:  # Replace with your database session management function
-        categorize_customers(db)  # Call your categorize_customers function
+    with get_async_db() as db: 
+        categorize_customers(db)  # Call  categorize_customers function
 
 # Schedule the job to run daily at a specific time (e.g., midnight)
 scheduler.add_job(
