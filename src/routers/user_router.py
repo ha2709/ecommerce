@@ -59,8 +59,6 @@ async def create_user_endpoint(user: UserCreate, db: AsyncSession = Depends(get_
 
 
 # Endpoint to handle verification (user clicks the link)
-
-
 @router.get(
     "/verify/",
      summary="Verify user's email",

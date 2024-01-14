@@ -87,3 +87,5 @@ schedule the `categorize_customers.py` function to run periodically, such as dai
 `cd shopping-client`
 
 `npm start`
+
+`pytest tests/test_main.py -v`
