@@ -13,10 +13,19 @@ from src.models.base import Base
 from src.models.department import Department
 from src.models.order import Order
 from src.models.product import Product
-from src.models.shopping_cart import ShoppingCartItem
+from src.models.shopping_cart_item import ShoppingCartItem
 from src.models.token import VerificationToken
+from src.models.order_product import OrderProduct
+ 
+from src.models.customer import Customer
+from src.models.discount import Discount
+from src.models.order_item import OrderItem
+from src.models.product_category import ProductCategory
+from src.models.shopping_cart import ShoppingCart
+ 
 
-print(12, User, Base)
+
+ 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
