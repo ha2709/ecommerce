@@ -34,7 +34,7 @@ from src.models.product import Product
 from src.models.order import Order
 from src.models.shopping_cart_item import ShoppingCartItem
 from src.models.token import VerificationToken
- 
+from src.models.order_product import OrderProduct
  
 from src.models.customer import Customer
 from src.models.discount import Discount

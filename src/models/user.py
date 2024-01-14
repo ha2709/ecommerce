@@ -14,4 +14,6 @@ class User(Base):
 
     # Define a relationship with the Department model
     department = relationship('Department', back_populates='users')
-    orders = relationship('Order', back_populates='user')
+    # orders = relationship('Order', back_populates='user')
+    # Define a one-to-one relationship with Customer
+    customer = relationship('Customer', uselist=False, back_populates='user')

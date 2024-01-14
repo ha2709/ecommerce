@@ -11,6 +11,12 @@ class Product(Base):
     price = Column(Float)
     department_id = Column(UUID(as_uuid=True), ForeignKey('departments.id'))
     category_id = Column(UUID(as_uuid=True), ForeignKey('product_categories.id'))
-    # Define a relationship with the ProductCategory model
-    category = relationship('ProductCategory', back_populates='products')
+    # order_id = Column(UUID(as_uuid=True), ForeignKey('orders.id'))
+    # Define the relationship to ProductCategory with the foreign_keys argument
+    category = relationship('ProductCategory', back_populates='products', foreign_keys=[category_id])
     department = relationship('Department', back_populates='products')
+    # Define the relationship to Order (many-to-one)
+    order_id = Column(UUID(as_uuid=True), ForeignKey('orders.id'))
+    order = relationship('Order', back_populates='products_association')
+    ## Define the many-to-many relationship to Order via OrderProduct
+    # orders_association = relationship('Order', secondary='order_products', back_populates='products_association')
