@@ -34,7 +34,7 @@ from models.order import Order
 from models.shopping_cart_item import ShoppingCartItem
 from models.verfication_token import VerificationToken
 from models.order_product import OrderProduct
-
+# from models.association import association_table
 from models.customer import Customer
 from models.discount import Discount
 from models.order_item import OrderItem

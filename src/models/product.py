@@ -3,8 +3,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from models.base import Base
-
-
+# from models.association import association_table
+from models.shopping_cart import ShoppingCart
 class Product(Base):
     __tablename__ = "products"
     id = Column(
@@ -29,7 +29,16 @@ class Product(Base):
 
     department = relationship("Department", back_populates="products")
     # Define a many-to-one relationship with Order
-    # Use backref to create the reverse relationship
+ 
     order_products = relationship("OrderProduct", backref="product")
-    # Rename this relationship to match the back_populates in OrderItem
+  
     order_items = relationship("OrderItem", backref="product_order_item")
+  
+    # Define the many-to-many relationship with ShoppingCart through association_table
+    # carts = relationship(
+    #     "ShoppingCart",
+    #     secondary=association_table,
+    #     back_populates="products",
+    # )
+    cart_items = relationship('ShoppingCart', backref='product')
+    

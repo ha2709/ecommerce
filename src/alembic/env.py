@@ -1,31 +1,23 @@
 from logging.config import fileConfig
- 
+
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-import sys
-import os
 
-sys.path.append(os.getcwd())
 from alembic import context
-# from database import Base
-from src.models.user import User
-from src.models.base import Base
-from src.models.department import Department
+from  models.user import User
+from  models.base import Base
+from models.department import Department
 from models.order import Order
 from models.product import Product
 from models.shopping_cart_item import ShoppingCartItem
 from models.verfication_token import VerificationToken
 from models.order_product import OrderProduct
- 
+# from models.association import association_table
 from models.customer import Customer
 from models.discount import Discount
 from models.order_item import OrderItem
 from models.product_category import ProductCategory
 from models.shopping_cart import ShoppingCart
- 
-
-
- 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -38,8 +30,8 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
+# target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

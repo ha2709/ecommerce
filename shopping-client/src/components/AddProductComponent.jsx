@@ -7,46 +7,28 @@ function AddProductComponent() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const productData = {
-            product_id: productId,
-            quantity: Number(quantity)
-        };
+ 
         const backendURL = `${process.env.REACT_APP_BACKEND_URL}/cart/add_product`;
-        const data = new URLSearchParams();
-        data.append('product_id', 'theProductId');  
-        data.append('quantity', '1');                
+        const data = {
+            product_id: '83bb1d29-aaaa-49bc-babe-46e608d9a383',
+            quantity: 1
+          };       // Replace with actual quantity
         const accessToken = localStorage.getItem('accessToken');
         const config = {
             headers: {
                 'Accept': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
             }
         };
     
         try {
-            const itemData = {
-                product_id: '6f2adc35-7ea4-48d1-92b7-08b9484488ed',
-                quantity: 1
-              };
-            const response = await fetch(backendURL, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: JSON.stringify(itemData),
-              });
-          
-              const data = await response.json();
-            // const response = await axios.post(backendURL, data, config);
-            // console.log(response.data);
-            
+            const response = await axios.post(backendURL, data, config);
+            console.log(response.data);
+            // Handle adding product to cart success (e.g., update cart UI, confirmation message)
         } catch (error) {
             console.error('Adding product to cart failed:', error);
-             
+            // Handle adding product to cart failure (e.g., error message to user)
         }
     }
     return (

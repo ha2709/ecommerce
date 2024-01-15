@@ -67,24 +67,50 @@ For example, the send_verification_email function is responsible for sending ema
 The parameter `db` is being injected into the `verify_user` function using FastAPI's dependency injection mechanism. This is a form of Dependency Injection, which is an architectural pattern used to manage and provide dependencies to components of an application. It helps in decoupling the code and making it more modular and testable
 
 
-`uvicorn main:app --reload`
+# Project Deployment Instructions
+This document outlines the necessary steps for deploying the project using Docker and managing PostgreSQL. Follow these instructions for a smooth deployment process.
 
-`alembic revision --autogenerate -m "create_relationship"`
-
-`alembic upgrade head`
-
-`build -t backend .`
-
-`docker run -p 8000:8000 backend`
+## Deployment Steps
+### Managing PostgreSQL Service
+### 1. Stop the Local PostgreSQL Service:
+Before proceeding with Docker, ensure the local PostgreSQL service is stopped to avoid any conflicts:
 
 `systemctl stop postgresql`
 
-`systemctl start postgresql`
+## Running Docker for Deployment
+### 1. Build and Start Docker Services:
+Build and start all services defined in your docker-compose file. This command also rebuilds the services if there have been changes:
+ 
+ `docker-compose up --build`
 
-`docker-compose up --build`
+ ## 2. Start Docker Services Without Rebuilding:
+To start all services defined in your docker-compose file without rebuilding:
 
-To run docker :
 `docker-compose up`
 
-To stop docker: 
+## 3. Stopping Docker Services:
+To stop all services and remove the associated containers, networks, and volumes:
+
 `docker-compose down`
+
+# Database Migration in Docker
+## 1. Attach to the Backend Container:
+After starting Docker, attach to the backend container to run the Alembic commands for database migration.
+
+## 2. Creating a New Database Migration:
+Generate a new migration file with the specified message:
+
+`alembic revision --autogenerate -m "create_relationship"`
+
+## 3. Upgrading the Database to the Latest Revision:
+Apply the latest migration to the database:
+
+`alembic upgrade head`
+
+## Additional Notes
+
+- Ensure all Docker services are running smoothly before proceeding with database migrations.
+- Monitor the Docker containers and PostgreSQL service for any errors during startup or operation.
+- Regularly update your Docker configurations and database schema as needed.
+
+For further assistance or queries, please contact the development team.

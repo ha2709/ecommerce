@@ -38,14 +38,14 @@ async def get_current_user(
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
        
-        user_id: str = payload.get("sub")
-        
-        if user_id is None:
+        user_email: str = payload.get("sub")
+        print(42, user_email)
+        if user_email is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Could not validate credentials",
             )
-        token_data = {"sub": user_id}
+        token_data = {"sub": user_email}
     except (JWTError, ValidationError):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
