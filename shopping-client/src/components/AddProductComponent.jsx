@@ -14,23 +14,25 @@ function AddProductComponent() {
         };
         const backendURL = `${process.env.REACT_APP_BACKEND_URL}/cart/add_product`;
         const data = new URLSearchParams();
-        data.append('product_id', 'theProductId');  // Replace with actual product ID
-        data.append('quantity', '1');               // Replace with actual quantity
+        data.append('product_id', 'theProductId');  
+        data.append('quantity', '1');                
         
         const config = {
             headers: {
                 'Accept': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         };
     
         try {
+            const accessToken = localStorage.getItem('accessToken');
             const response = await axios.post(backendURL, productData, config);
             console.log(response.data);
-            // Handle adding product to cart success (e.g., update cart UI, confirmation message)
+            
         } catch (error) {
             console.error('Adding product to cart failed:', error);
-            // Handle adding product to cart failure (e.g., error message to user)
+             
         }
     }
     return (

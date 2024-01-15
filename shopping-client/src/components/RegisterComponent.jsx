@@ -13,10 +13,10 @@ function RegisterComponent() {
             const response = await axios.post(' BACKEND_URL/register', { email,
                 password, userType, departmentId });
                 console.log(response.data);
-                // Handle registration success
+                 
         } catch (error) {
             console.error('Registration failed:', error);
-        // Handle registration failure
+         
         }
         };
     return (

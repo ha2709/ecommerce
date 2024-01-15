@@ -9,18 +9,23 @@ function DiscountConfigComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            const accessToken = localStorage.getItem('accessToken');
             const discountData = {
                 customer_category: customerCategory,
                 product_category_id: productCategoryId,
                 percentage: parseFloat(percentage) / 100, // Assuming the percentage should be submitted as a decimal
             };
             
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/discounts`, discountData);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/discounts`, discountData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
             console.log(response.data);
-            // Handle success - maybe clear form or show a success message
+             
         } catch (error) {
             console.error('Error creating discount:', error);
-            // Handle error - show error message to the user
+            
         }
     };
 

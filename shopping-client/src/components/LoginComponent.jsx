@@ -25,10 +25,11 @@ function LoginComponent() {
         try {
             const response = await axios.post(backendURL, data, config  );
             console.log(response.data);
-            // Handle login success (e.g., redirect, store token)
+            localStorage.setItem('accessToken', response.data.access_token);
+  
         } catch (error) {
             console.error('Login failed:', error);
-            // Handle login failure
+             
         }
     };
 
