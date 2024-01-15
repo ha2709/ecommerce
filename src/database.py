@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
-from src.models.token import VerificationToken
+from src.models.verfication_token import VerificationToken
 import asyncio
 
 load_dotenv()
@@ -32,7 +32,7 @@ from src.models.department import Department
 from src.models.product import Product
 from src.models.order import Order
 from src.models.shopping_cart_item import ShoppingCartItem
-from src.models.token import VerificationToken
+from src.models.verfication_token import VerificationToken
 from src.models.order_product import OrderProduct
 
 from src.models.customer import Customer

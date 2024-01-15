@@ -6,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.schemas.user import UserCreate, UserResponse
 from src.database import get_async_db
-from src.models.token import VerificationToken
+from src.models.verfication_token import VerificationToken
 from src.models.user import User
 from src.models.department import Department
 from src.services.user_service import create_user
