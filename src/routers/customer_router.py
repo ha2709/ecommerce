@@ -22,6 +22,5 @@ async def categorize_customer(user_id: str, db: AsyncSession = Depends(get_async
 
     # Categorize the customer based on the number of successful orders
     customer_category = customer.categorize()
-
     # Return the customer category as a string
     return customer_category.value

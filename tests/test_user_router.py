@@ -1,7 +1,11 @@
 import os
 import pytest
 from httpx import AsyncClient
+<<<<<<< HEAD
 from main import app   
+=======
+from src.main import app  # Import your FastAPI app here
+>>>>>>> main
 from dotenv import load_dotenv
 import asyncio
 
@@ -30,7 +34,11 @@ headers = {
 #     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
 #         response = await ac.post("/users/", json=user_data, headers=headers)
 #     assert response.status_code == 200  # or the expected status code
+<<<<<<< HEAD
 #     
+=======
+#     # Add more assertions based on your UserResponse schema
+>>>>>>> main
 
 # @pytest.mark.asyncio
 # async def test_verify_user(event_loop):
@@ -45,12 +53,20 @@ headers = {
 #         "email": "newuser@example.com",
 #         "password": "newpassword123",
 #         "user_type": "customer",
+<<<<<<< HEAD
 #         "department_id": "1"  
+=======
+#         "department_id": "1"  # Adjust based on your setup
+>>>>>>> main
 #     }
 #     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
 #         response = await ac.post("/users/register/", json=register_data, headers=headers)
 #     assert response.status_code == 200  # or 400 if department doesn't exist
+<<<<<<< HEAD
     
+=======
+    # Add more assertions as needed
+>>>>>>> main
 
 
 @pytest.mark.asyncio
@@ -62,7 +78,11 @@ async def test_create_user():
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/", json=user_data, headers=headers)
     assert response.status_code == 200  # or the expected status code
+<<<<<<< HEAD
    
+=======
+    # Add more assertions based on your UserResponse schema
+>>>>>>> main
 
 @pytest.mark.asyncio
 async def test_verify_user():
@@ -77,7 +97,11 @@ async def test_register_user():
         "email": "newuser@example.com",
         "password": "newpassword123",
         "user_type": "customer",
+<<<<<<< HEAD
         "department_id": "1"   
+=======
+        "department_id": "1"  # Adjust based on your setup
+>>>>>>> main
     }
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/register/", json=register_data, headers=headers)

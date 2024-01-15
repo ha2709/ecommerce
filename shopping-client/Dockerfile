@@ -8,8 +8,8 @@ WORKDIR app/
 COPY . /app
 
 # Install dependencies
-RUN npm install
-
+RUN npm install --force
+RUN npm install react-scripts --save
 # Build the React app
 RUN npm run build
 

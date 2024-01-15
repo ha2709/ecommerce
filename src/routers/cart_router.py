@@ -52,7 +52,6 @@ async def add_product_to_shopping_cart(
     # """
     # Asynchronously add a product to the shopping cart for the current user.
     # """
-    print(52)
 
     result = await db.execute(select(DBShoppingCart).filter_by(product_id=item.product_id))
     db_shopping_cart = result.scalars().first()
@@ -68,16 +67,7 @@ async def add_product_to_shopping_cart(
         db_shopping_cart.items.append(ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart))
 
     await db.commit()
-
-    # product = Product.query.filter(Product.id == product_id)
-    # cart_item = CartItem(product=product)
-    # db.session.add(cart_item)
-    # db.session.commit()
-
     return {"message": "Product added to the shopping cart successfully"}
-
-    
-
 
 # Remove Product from Shopping Cart
 @router.post(

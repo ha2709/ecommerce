@@ -34,11 +34,6 @@ class Product(Base):
   
     order_items = relationship("OrderItem", backref="product_order_item")
   
-    # Define the many-to-many relationship with ShoppingCart through association_table
-    # carts = relationship(
-    #     "ShoppingCart",
-    #     secondary=association_table,
-    #     back_populates="products",
-    # )
+
     cart_items = relationship('ShoppingCart', backref='product')
     

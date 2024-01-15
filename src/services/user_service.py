@@ -1,17 +1,10 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from passlib.context import CryptContext
 from models.user import User as UserModel
 from schemas.user import UserCreate
 from sqlalchemy.future import select
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from schemas.user import UserCreate
-from models.user import User as UserModel
-from passlib.context import CryptContext
-from models.user import User
+# from models.user import User
 # Create a password context instance
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -41,8 +34,8 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
 
 
 async def authenticate_user(email: str, password: str, db: AsyncSession):
-    print(44, "authenticate_user ",email)
-    result = await db.execute(select(User).filter(User.email == email))
+    
+    result = await db.execute(select(UserModel).filter(UserModel.email == email))
     user = result.scalars().first()
     if not user:
         return False

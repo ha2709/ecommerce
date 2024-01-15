@@ -35,7 +35,6 @@ app.add_middleware(
 async def read_root():
     return {"Hello": "World"}
 
-
 # Define a route to trigger the scheduler externally
 @app.get("/run-scheduler")
 def run_scheduler():
@@ -45,7 +44,7 @@ def run_scheduler():
     except Exception as e:
         return {"message": f"Scheduler failed: {str(e)}"}
 
-
+ 
 app.include_router(cart_router.router, prefix="/cart")
 app.include_router(customer_router.router, prefix="/customers")
 app.include_router(discount_router.router, prefix="/discounts")

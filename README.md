@@ -65,7 +65,18 @@ Each function or module has a single responsibility.
 For example, the send_verification_email function is responsible for sending emails, and the /users/ endpoint is responsible for user registration.
 # Dependency injection:
 The parameter `db` is being injected into the `verify_user` function using FastAPI's dependency injection mechanism. This is a form of Dependency Injection, which is an architectural pattern used to manage and provide dependencies to components of an application. It helps in decoupling the code and making it more modular and testable
+I use Asynchoronous paradigm for these benefits: 
 
+- 1. Improved Performance for I/O Bound Tasks: Asynchronous endpoints are highly efficient for I/O-bound operations (like database access, network calls). They don't block the server thread while waiting for the I/O operation to complete. This allows handling more requests simultaneously, leading to better throughput.
+- 2. Better Scalability: Since async endpoints can handle multiple requests concurrently without creating new threads or processes, the server can serve more requests with fewer resources, enhancing scalability.
+- 3. Non-blocking Nature: Async allows for non-blocking code execution, which is particularly beneficial in scenarios where a service needs to make multiple external API calls or database queries.
+- 4. Modern Python Features: Asynchronous programming is supported natively in modern Python (3.7+), allowing developers to leverage features like async/await syntax, which leads to cleaner and more maintainable code for asynchronous operations.
+
+schedule the `categorize_customers.py` function to run periodically, such as daily or weekly, to update customer categories based on their order history.
+
+`python3 -m venv env`
+
+`source env/bin/activate`
 
 # Project Deployment Instructions
 This document outlines the necessary steps for deploying the project using Docker and managing PostgreSQL. Follow these instructions for a smooth deployment process.
@@ -102,6 +113,7 @@ Generate a new migration file with the specified message:
 
 `alembic revision --autogenerate -m "create_relationship"`
 
+<<<<<<< HEAD
 ## 3. Upgrading the Database to the Latest Revision:
 Apply the latest migration to the database:
 
@@ -114,3 +126,12 @@ Apply the latest migration to the database:
 - Regularly update your Docker configurations and database schema as needed.
 
 For further assistance or queries, please contact the development team.
+=======
+`alembic upgrade head`
+
+`cd shopping-client`
+
+`npm start`
+
+`pytest tests/test_main.py -v`
+>>>>>>> main

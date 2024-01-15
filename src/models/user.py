@@ -23,7 +23,5 @@ class User(Base):
 
     orders = relationship("Order", back_populates="user")
 
-    # Define a foreign key relationship to the Customer class
-
     customer_id = Column(UUID(as_uuid=True), ForeignKey("customers.id"))
     customer = relationship("Customer", back_populates="user")

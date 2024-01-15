@@ -16,8 +16,6 @@ engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionFactory = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-
-
 # Dependency to get the database session
 async def get_async_db():
     async with AsyncSessionFactory() as session:

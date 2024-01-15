@@ -4,7 +4,6 @@ from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from models.base import Base
 
-
 class ShoppingCartItem(Base):
     __tablename__ = "shopping_cart_items"
     id = Column(
