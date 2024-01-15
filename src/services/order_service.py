@@ -2,12 +2,12 @@ from typing import List
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.models.product import Product
-from src.models.customer import Customer
-from src.models.discount import Discount
-from src.models.product_category import ProductCategory
-from src.schemas.order import OrderItemCreate
-from src.database import get_async_db  # Adjust this import according to your project structure
+from models.product import Product
+from models.customer import Customer
+from models.discount import Discount
+from models.product_category import ProductCategory
+from schemas.order import OrderItemCreate
+from database import get_async_db  # Adjust this import according to your project structure
 
 async def calculate_total_price(
     order_items: List[OrderItemCreate], 

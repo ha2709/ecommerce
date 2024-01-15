@@ -78,10 +78,55 @@ schedule the `categorize_customers.py` function to run periodically, such as dai
 
 `source env/bin/activate`
 
-`uvicorn src.main:app --reload`
+# Project Deployment Instructions
+This document outlines the necessary steps for deploying the project using Docker and managing PostgreSQL. Follow these instructions for a smooth deployment process.
+
+## Deployment Steps
+### Managing PostgreSQL Service
+### 1. Stop the Local PostgreSQL Service:
+Before proceeding with Docker, ensure the local PostgreSQL service is stopped to avoid any conflicts:
+
+`systemctl stop postgresql`
+
+## Running Docker for Deployment
+### 1. Build and Start Docker Services:
+Build and start all services defined in your docker-compose file. This command also rebuilds the services if there have been changes:
+ 
+ `docker-compose up --build`
+
+ ## 2. Start Docker Services Without Rebuilding:
+To start all services defined in your docker-compose file without rebuilding:
+
+`docker-compose up`
+
+## 3. Stopping Docker Services:
+To stop all services and remove the associated containers, networks, and volumes:
+
+`docker-compose down`
+
+# Database Migration in Docker
+## 1. Attach to the Backend Container:
+After starting Docker, attach to the backend container to run the Alembic commands for database migration.
+
+## 2. Creating a New Database Migration:
+Generate a new migration file with the specified message:
 
 `alembic revision --autogenerate -m "create_relationship"`
 
+<<<<<<< HEAD
+## 3. Upgrading the Database to the Latest Revision:
+Apply the latest migration to the database:
+
+`alembic upgrade head`
+
+## Additional Notes
+
+- Ensure all Docker services are running smoothly before proceeding with database migrations.
+- Monitor the Docker containers and PostgreSQL service for any errors during startup or operation.
+- Regularly update your Docker configurations and database schema as needed.
+
+For further assistance or queries, please contact the development team.
+=======
 `alembic upgrade head`
 
 `cd shopping-client`
@@ -89,3 +134,4 @@ schedule the `categorize_customers.py` function to run periodically, such as dai
 `npm start`
 
 `pytest tests/test_main.py -v`
+>>>>>>> main

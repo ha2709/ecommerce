@@ -1,5 +1,5 @@
 from logging.config import fileConfig
-print(2)
+ 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 import sys
@@ -7,10 +7,26 @@ import os
 
 sys.path.append(os.getcwd())
 from alembic import context
-# from src.database import Base
+# from database import Base
 from src.models.user import User
 from src.models.base import Base
 from src.models.department import Department
+<<<<<<< HEAD
+from models.order import Order
+from models.product import Product
+from models.shopping_cart_item import ShoppingCartItem
+from models.verfication_token import VerificationToken
+from models.order_product import OrderProduct
+ 
+from models.customer import Customer
+from models.discount import Discount
+from models.order_item import OrderItem
+from models.product_category import ProductCategory
+from models.shopping_cart import ShoppingCart
+ 
+
+
+=======
 from src.models.order import Order
 from src.models.product import Product
 from src.models.shopping_cart_item import ShoppingCartItem
@@ -24,6 +40,7 @@ from src.models.product_category import ProductCategory
 from src.models.shopping_cart import ShoppingCart
  
 
+>>>>>>> main
  
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

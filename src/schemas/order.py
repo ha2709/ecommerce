@@ -5,8 +5,10 @@ class OrderItemCreate(BaseModel):
     product_id: str
     quantity: int
 
+
 class OrderCreate(BaseModel):
     items: List[OrderItemCreate]
+
 
 class Order(BaseModel):
     id: str

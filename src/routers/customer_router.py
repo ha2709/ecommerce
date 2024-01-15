@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.database import get_async_db
-from src.models.customer import Customer
-from src.models.order import Order
+from database import get_async_db
+from models.customer import Customer
+from models.order import Order
 
 router = APIRouter()
+
 
 # Define an endpoint to categorize customers based on successful orders
 @router.get("/categorize/{user_id}", response_model=str)
@@ -21,6 +22,5 @@ async def categorize_customer(user_id: str, db: AsyncSession = Depends(get_async
 
     # Categorize the customer based on the number of successful orders
     customer_category = customer.categorize()
-    
     # Return the customer category as a string
     return customer_category.value
