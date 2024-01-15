@@ -79,6 +79,8 @@ The parameter `db` is being injected into the `verify_user` function using FastA
 
 `systemctl stop postgresql`
 
+`systemctl start postgresql`
+
 `docker-compose up --build`
 
 To run docker :

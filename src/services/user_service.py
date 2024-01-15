@@ -41,6 +41,7 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
 
 
 async def authenticate_user(email: str, password: str, db: AsyncSession):
+    print(44, "authenticate_user ",email)
     result = await db.execute(select(User).filter(User.email == email))
     user = result.scalars().first()
     if not user:

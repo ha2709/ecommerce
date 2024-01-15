@@ -16,7 +16,7 @@ function AddProductComponent() {
         const data = new URLSearchParams();
         data.append('product_id', 'theProductId');  
         data.append('quantity', '1');                
-        
+        const accessToken = localStorage.getItem('accessToken');
         const config = {
             headers: {
                 'Accept': 'application/json',
@@ -26,9 +26,23 @@ function AddProductComponent() {
         };
     
         try {
-            const accessToken = localStorage.getItem('accessToken');
-            const response = await axios.post(backendURL, productData, config);
-            console.log(response.data);
+            const itemData = {
+                product_id: '6f2adc35-7ea4-48d1-92b7-08b9484488ed',
+                quantity: 1
+              };
+            const response = await fetch(backendURL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: JSON.stringify(itemData),
+              });
+          
+              const data = await response.json();
+            // const response = await axios.post(backendURL, data, config);
+            // console.log(response.data);
             
         } catch (error) {
             console.error('Adding product to cart failed:', error);

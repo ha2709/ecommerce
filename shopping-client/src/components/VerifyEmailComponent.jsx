@@ -10,10 +10,10 @@ function VerifyEmailComponent() {
             try {
                 const response = await axios.get(`BACKEND_URL/verify?token=${token}`);
                 console.log(response.data);
-                // Handle verification success
+                
             } catch (error) {
                 console.error('Email verification failed:', error);
-                // Handle verification failure
+                
             }
         };
 

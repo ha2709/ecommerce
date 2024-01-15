@@ -39,36 +39,49 @@ async def get_shopping_cart(
 
 # Add Product to Shopping Cart
 @router.post(
-    "/add_product", summary="Add a product to the shopping cart"
+    "/add_product", 
+    summary="Add a product to the shopping cart"
 )
 async def add_product_to_shopping_cart(
-    item: ShoppingCartItemCreate,
+    # item: ShoppingCartItemCreate,
     db: AsyncSession = Depends(get_async_db),
     current_user: User = Depends(get_current_user),
 ):
     """
     Asynchronously add a product to the shopping cart for the current user.
     """
-    result = await db.execute(
-        select(DBShoppingCart).filter_by(customer_id=current_user.id)
-    )
-    db_shopping_cart = result.scalars().first()
+    print(52)
 
-    if not db_shopping_cart:
-        raise HTTPException(status_code=404, detail="Shopping cart not found")
+    # Create an instance of the ShoppingCart class
+    # shopping_cart = ShoppingCart()
 
-    existing_item = next(
-        (i for i in db_shopping_cart.items if i.product_id == item.product_id), None
-    )
+    # Now, you can access the customer_id attribute on the instance
+    # shopping_cart.customer_id = current_user.id
 
-    if existing_item:
-        existing_item.quantity += item.quantity
-    else:
-        db_shopping_cart.items.append(
-            ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart)
-        )
+    # Perform your database query using the instance
+    # result = await db.execute(
+    #     select(DBShoppingCart).filter_by(customer_id=shopping_cart.customer_id)
+    # )
+    # result = await db.execute(
+    #     select(DBShoppingCart).filter_by(customer_id=current_user.id)
+    # )
+    # db_shopping_cart = result.scalars().first()
 
-    await db.commit()
+    # if not db_shopping_cart:
+    #     raise HTTPException(status_code=404, detail="Shopping cart not found")
+
+    # existing_item = next(
+    #     (i for i in db_shopping_cart.items if i.product_id == item.product_id), None
+    # )
+
+    # if existing_item:
+    #     existing_item.quantity += item.quantity
+    # else:
+    #     db_shopping_cart.items.append(
+    #         ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart)
+    #     )
+
+    # await db.commit()
 
     return {"message": "Product added to the shopping cart successfully"}
 

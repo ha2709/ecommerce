@@ -18,6 +18,7 @@ BASE_URL = os.getenv("BASE_URL")
 
 # List of allowed origins (use "*" to allow all origins)
 origins = [
+    "*",
     FRONTEND_URL,
     BASE_URL
 ]

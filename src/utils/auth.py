@@ -37,7 +37,9 @@ async def get_current_user(
     """
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+       
         user_id: str = payload.get("sub")
+        
         if user_id is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -49,9 +51,11 @@ async def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
         )
-
-    result = await db.execute(select(User).filter(User.id == token_data["sub"]))
+   
+    result = await db.execute(select(User).filter(User.email == token_data["sub"]))
+     
     user = result.scalars().first()
+    
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found"
