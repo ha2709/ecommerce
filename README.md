@@ -113,7 +113,6 @@ Generate a new migration file with the specified message:
 
 `alembic revision --autogenerate -m "create_relationship"`
 
-<<<<<<< HEAD
 ## 3. Upgrading the Database to the Latest Revision:
 Apply the latest migration to the database:
 
@@ -126,12 +125,3 @@ Apply the latest migration to the database:
 - Regularly update your Docker configurations and database schema as needed.
 
 For further assistance or queries, please contact the development team.
-=======
-`alembic upgrade head`
-
-`cd shopping-client`
-
-`npm start`
-
-`pytest tests/test_main.py -v`
->>>>>>> main
