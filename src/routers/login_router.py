@@ -11,7 +11,9 @@ router = APIRouter()
 # The token expires after 60 minutes
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 @router.post("", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_async_db)):
+async def login_for_access_token(
+    form_data: OAuth2PasswordRequestForm = Depends(), 
+    db: AsyncSession = Depends(get_async_db)):
     user = await authenticate_user(form_data.username, form_data.password, db)
     if not user:
         raise HTTPException(

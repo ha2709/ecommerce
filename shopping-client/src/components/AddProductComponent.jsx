@@ -2,67 +2,67 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function AddProductComponent() {
-    const [productName, setProductName] = useState('');
-    const [productPrice, setProductPrice] = useState('');
-    const [productDescription, setProductDescription] = useState('');
+    const [productId, setProductId] = useState('');
+    const [quantity, setQuantity] = useState(0);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const productData = {
-            name: productName,
-            price: productPrice,
-            description: productDescription
+            product_id: productId,
+            quantity: Number(quantity)
         };
-
+        const backendURL = `${process.env.REACT_APP_BACKEND_URL}/cart/add_product`;
+        const data = new URLSearchParams();
+        data.append('product_id', 'theProductId');  // Replace with actual product ID
+        data.append('quantity', '1');               // Replace with actual quantity
+        
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+    
         try {
-           
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/products/add`, productData);
+            const response = await axios.post(backendURL, productData, config);
             console.log(response.data);
-            // Handle success - clear form or show success message
+            // Handle adding product to cart success (e.g., update cart UI, confirmation message)
         } catch (error) {
-            console.error('Error adding product:', error);
-            // Handle error - show error message
+            console.error('Adding product to cart failed:', error);
+            // Handle adding product to cart failure (e.g., error message to user)
         }
-    };
-
+    }
     return (
         <div className="container mt-3">
-            <h2>Add Product</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="productName" className="form-label">Product Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="productName"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        required
-                    />
-                </div>
-                 <div className="mb-3">
-                    <label htmlFor="productPrice" className="form-label">Product Price</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="productPrice"
-                        value={productPrice}
-                        onChange={(e) => setProductPrice(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="productDescription" className="form-label">Product Description</label>
-                    <textarea className="form-control"
-                        id="productDescription"
-                        value={productDescription}
-                        onChange={(e) => setProductDescription(e.target.value)}
-                    ></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Add Product</button>
-            </form>
-        </div>
+        <h2>Add Product to Cart</h2>
+        <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+                <label htmlFor="productId" className="form-label">Product ID</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="productId"
+                    value={productId}
+                    onChange={(e) => setProductId(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="quantity" className="form-label">Quantity</label>
+                <input
+                    type="number"
+                    className="form-control"
+                    id="quantity"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    min="0"
+                    required
+                />
+            </div>
+            <button type="submit" className="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
             );
     }
 
