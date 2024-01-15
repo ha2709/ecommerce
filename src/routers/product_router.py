@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import update, delete
-from src.database import get_async_db   
-from src.schemas.product import Product, ProductCreate, ProductUpdate
-from src.models.product import Product as DBProduct
-from src.utils.auth import get_current_user  
-from src.models.user import User
+from database import get_async_db   
+from schemas.product import Product, ProductCreate, ProductUpdate
+from models.product import Product as DBProduct
+from utils.auth import get_current_user  
+from models.user import User
 
 router = APIRouter()
 

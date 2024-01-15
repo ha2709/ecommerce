@@ -4,15 +4,15 @@ from fastapi import Depends, HTTPException, APIRouter
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.schemas.user import UserCreate, UserResponse
-from src.database import get_async_db
-from src.models.verfication_token import VerificationToken
-from src.models.user import User
-from src.models.department import Department
-from src.services.user_service import create_user
-from src.services.email import send_verification_email
-from src.services.verification_service import create_verification_token
-from src.utils.token import generate_verification_token
+from schemas.user import UserCreate, UserResponse
+from database import get_async_db
+from models.verfication_token import VerificationToken
+from models.user import User
+from models.department import Department
+from services.user_service import create_user
+from services.email import send_verification_email
+from services.verification_service import create_verification_token
+from utils.token import generate_verification_token
 
 router = APIRouter()
 load_dotenv()

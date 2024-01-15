@@ -2,7 +2,7 @@ from sqlalchemy import Column, Float, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
-from src.models.base import Base
+from models.base import Base
 
 
 class OrderItem(Base):

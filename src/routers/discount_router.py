@@ -1,12 +1,12 @@
 from fastapi import Depends, HTTPException, APIRouter, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.database import get_async_db
-from src.models.user import User
-from src.utils.auth import get_current_user
-from src.models.discount import Discount
-from src.models.customer_category import CustomerCategory
-from src.schemas.discount import DiscountCreate, DiscountResponse
+from database import get_async_db
+from models.user import User
+from utils.auth import get_current_user
+from models.discount import Discount
+from models.customer_category import CustomerCategory
+from schemas.discount import DiscountCreate, DiscountResponse
 router = APIRouter()
 
 

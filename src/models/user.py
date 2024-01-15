@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Boolean, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship, backref
 import uuid
-from src.models.base import Base
+from models.base import Base
 
 
 class User(Base):

@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from src.models.base import Base
+from models.base import Base
 
 
 class Product(Base):

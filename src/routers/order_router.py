@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.database import get_async_db
-from src.models.customer import Customer
-from src.services.order_service import (
+from database import get_async_db
+from models.customer import Customer
+from services.order_service import (
     calculate_total_price,
 )  # make sure this is also async
-from src.utils.auth import get_current_user  # this should be async
-from src.schemas.order import OrderCreate, Order
+from utils.auth import get_current_user  # this should be async
+from schemas.order import OrderCreate, Order
 from typing import List
 
 router = APIRouter()

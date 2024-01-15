@@ -67,8 +67,22 @@ For example, the send_verification_email function is responsible for sending ema
 The parameter `db` is being injected into the `verify_user` function using FastAPI's dependency injection mechanism. This is a form of Dependency Injection, which is an architectural pattern used to manage and provide dependencies to components of an application. It helps in decoupling the code and making it more modular and testable
 
 
-`uvicorn src.main:app --reload`
+`uvicorn main:app --reload`
 
 `alembic revision --autogenerate -m "create_relationship"`
 
 `alembic upgrade head`
+
+`build -t backend .`
+
+`docker run -p 8000:8000 backend`
+
+`systemctl stop postgresql`
+
+`docker-compose up --build`
+
+To run docker :
+`docker-compose up`
+
+To stop docker: 
+`docker-compose down`

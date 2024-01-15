@@ -3,10 +3,10 @@ from fastapi.security import OAuth2PasswordRequestForm
 # from jose import jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import  timedelta
-from src.utils.auth import create_access_token
-from src.services.user_service import authenticate_user
-from src.models.token import Token
-from src.database import get_async_db
+from utils.auth import create_access_token
+from services.user_service import authenticate_user
+from models.token import Token
+from database import get_async_db
 router = APIRouter()
 # The token expires after 60 minutes
 ACCESS_TOKEN_EXPIRE_MINUTES = 60

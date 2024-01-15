@@ -4,13 +4,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
-from src.models.verfication_token import VerificationToken
+from models.verfication_token import VerificationToken
 import asyncio
 
 load_dotenv()
 # DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
 DATABASE_URL = os.environ.get("DATABASE_URL")
-# print(12, DATABASE_URL)
+print(12, DATABASE_URL)
 # engine = create_engine(DATABASE_URL)
 engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionFactory = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
@@ -27,19 +27,19 @@ async def get_async_db():
 # Import all modules here that might define models so that
 # they are registered properly on the metadata. Otherwise,
 # SQLAlchemy might not be aware of them.
-from src.models.user import User
-from src.models.department import Department
-from src.models.product import Product
-from src.models.order import Order
-from src.models.shopping_cart_item import ShoppingCartItem
-from src.models.verfication_token import VerificationToken
-from src.models.order_product import OrderProduct
+from models.user import User
+from models.department import Department
+from models.product import Product
+from models.order import Order
+from models.shopping_cart_item import ShoppingCartItem
+from models.verfication_token import VerificationToken
+from models.order_product import OrderProduct
 
-from src.models.customer import Customer
-from src.models.discount import Discount
-from src.models.order_item import OrderItem
-from src.models.product_category import ProductCategory
-from src.models.shopping_cart import ShoppingCart
+from models.customer import Customer
+from models.discount import Discount
+from models.order_item import OrderItem
+from models.product_category import ProductCategory
+from models.shopping_cart import ShoppingCart
 
 
 async def create_tables():

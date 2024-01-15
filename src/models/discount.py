@@ -2,8 +2,8 @@ from sqlalchemy import Column, Float, ForeignKey, Enum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
-from src.models.base import Base
-from src.models.customer import CustomerCategory
+from models.base import Base
+from models.customer import CustomerCategory
 
 
 class Discount(Base):

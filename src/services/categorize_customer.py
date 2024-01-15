@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.models.customer import Customer, CustomerCategory
-from src.models.order import Order
+from models.customer import Customer, CustomerCategory
+from models.order import Order
 from models.order_threshold import OrderThreshold
 
 async def categorize_customers(db: AsyncSession):

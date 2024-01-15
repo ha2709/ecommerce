@@ -4,7 +4,7 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
-from src.models.base import Base
+from models.base import Base
 
 
 class VerificationToken(Base):

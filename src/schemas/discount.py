@@ -1,6 +1,6 @@
 from pydantic import BaseModel, UUID4
 from typing import Optional
-from src.models.customer_category import CustomerCategory  # Enum for customer categories
+from models.customer_category import CustomerCategory  # Enum for customer categories
 
 class DiscountCreate(BaseModel):
     percentage: float

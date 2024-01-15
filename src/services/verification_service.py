@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.models.verfication_token import VerificationToken
+from models.verfication_token import VerificationToken
 
 
 async def create_verification_token(db: AsyncSession, email: str, token: str):

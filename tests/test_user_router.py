@@ -1,7 +1,7 @@
 import os
 import pytest
 from httpx import AsyncClient
-from src.main import app   
+from main import app   
 from dotenv import load_dotenv
 import asyncio
 

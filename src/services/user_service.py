@@ -1,17 +1,17 @@
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
-from src.models.user import User as UserModel
-from src.schemas.user import UserCreate
+from models.user import User as UserModel
+from schemas.user import UserCreate
 from sqlalchemy.future import select
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.schemas.user import UserCreate
-from src.models.user import User as UserModel
+from schemas.user import UserCreate
+from models.user import User as UserModel
 from passlib.context import CryptContext
-from src.models.user import User
+from models.user import User
 # Create a password context instance
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

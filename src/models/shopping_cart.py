@@ -2,7 +2,7 @@ from sqlalchemy import Column
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from sqlalchemy.orm import relationship
-from src.models.base import Base
+from models.base import Base
 
 
 class ShoppingCart(Base):

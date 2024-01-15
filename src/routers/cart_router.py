@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from src.database import get_async_db
-from src.models.shopping_cart import ShoppingCart as DBShoppingCart
-from src.models.shopping_cart_item import ShoppingCartItem
-from src.schemas.shopping_cart import (
+from database import get_async_db
+from models.shopping_cart import ShoppingCart as DBShoppingCart
+from models.shopping_cart_item import ShoppingCartItem
+from schemas.shopping_cart import (
     ShoppingCart,
     ShoppingCartItemCreate,
     ShoppingCartItemUpdate,
 )
-from src.models.user import User
-from src.utils.auth import get_current_user
+from models.user import User
+from utils.auth import get_current_user
 
 router = APIRouter()
 
