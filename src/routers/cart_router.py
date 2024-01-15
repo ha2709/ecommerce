@@ -17,7 +17,7 @@ router = APIRouter()
 
 # Get Shopping Cart
 @router.get(
-    "/shopping_cart/", response_model=ShoppingCart, summary="Get the shopping cart"
+    "", response_model=ShoppingCart, summary="Get the shopping cart"
 )
 async def get_shopping_cart(
     db: AsyncSession = Depends(get_async_db),
@@ -39,7 +39,7 @@ async def get_shopping_cart(
 
 # Add Product to Shopping Cart
 @router.post(
-    "/shopping_cart/add_product/", summary="Add a product to the shopping cart"
+    "/add_product", summary="Add a product to the shopping cart"
 )
 async def add_product_to_shopping_cart(
     item: ShoppingCartItemCreate,
@@ -75,7 +75,7 @@ async def add_product_to_shopping_cart(
 
 # Remove Product from Shopping Cart
 @router.post(
-    "/shopping_cart/remove_product/", summary="Remove a product from the shopping cart"
+    "/remove_product", summary="Remove a product from the shopping cart"
 )
 async def remove_product_from_shopping_cart(
     item: ShoppingCartItemUpdate,

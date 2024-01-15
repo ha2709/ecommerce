@@ -13,7 +13,7 @@ from typing import List
 router = APIRouter()
 
 
-@router.post("/orders/", response_model=Order, summary="Place an order")
+@router.post("", response_model=Order, summary="Place an order")
 async def place_order(
     order_create: OrderCreate,
     db: AsyncSession = Depends(get_async_db),
@@ -44,7 +44,7 @@ async def place_order(
 
 
 @router.get(
-    "/orders/history/", response_model=List[Order], summary="Fetch order history"
+    "/history/", response_model=List[Order], summary="Fetch order history"
 )
 async def fetch_order_history(
     db: AsyncSession = Depends(get_async_db),

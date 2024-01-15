@@ -11,14 +11,14 @@ from src.models.user import User
 router = APIRouter()
 
 # Get All Products
-@router.get("/products/", response_model=list[Product], summary="Get all products")
+@router.get("", response_model=list[Product], summary="Get all products")
 async def get_all_products(db: AsyncSession = Depends(get_async_db)):
     result = await db.execute(select(DBProduct))
     products = result.scalars().all()
     return products
 
 # Create Product
-@router.post("/products/", response_model=Product, summary="Create a new product")
+@router.post("", response_model=Product, summary="Create a new product")
 async def create_product(
     product: ProductCreate,
     db: AsyncSession = Depends(get_async_db),
@@ -31,7 +31,7 @@ async def create_product(
     return new_product
 
 # Update Product
-@router.put("/products/{product_id}", response_model=Product, summary="Update a product")
+@router.put("/{product_id}", response_model=Product, summary="Update a product")
 async def update_product(
     product_id: int,
     product_update: ProductUpdate,
@@ -44,7 +44,7 @@ async def update_product(
     return await db.get(DBProduct, product_id)
 
 # Delete Product
-@router.delete("/products/{product_id}", summary="Delete a product")
+@router.delete("/{product_id}", summary="Delete a product")
 async def delete_product(
     product_id: int,
     db: AsyncSession = Depends(get_async_db),

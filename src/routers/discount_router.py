@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 # Define an endpoint to get the discount percentage for a specific customer and product category
-@router.get("/discount/")
+@router.get("")
 async def get_discount_percentage(
     customer_category: CustomerCategory,
     product_category: str,

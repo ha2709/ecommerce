@@ -13,8 +13,9 @@ from datetime import datetime, timedelta
 load_dotenv()
 
 # Define settings as variables
-SECRET_KEY = os.getenv("API_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")  # HS256 is a commonly used algorithm
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 

@@ -22,7 +22,7 @@ BASE_URL = os.getenv("BASE_URL")
 
 
 @router.post(
-    "/",
+    "",
     response_model=UserResponse,
     summary="Create a new user",
     description="Creates a new user and sends a verification email.",
@@ -50,7 +50,7 @@ async def create_user_endpoint(
 
     # Send the verification email
     send_verification_email(user.email, verification_link)
-    db_user = create_user(db, user)
+    db_user = await create_user(db, user)
     if db_user is None:
         raise HTTPException(status_code=400, detail="Email already registered")
 
@@ -62,7 +62,7 @@ async def create_user_endpoint(
 
 # Endpoint to handle verification (user clicks the link)
 @router.get(
-    "/verify/",
+    "/verify",
     summary="Verify user's email",
     description="Verifies the user's email by clicking a verification link.",
 )
@@ -99,7 +99,7 @@ async def verify_user(token: str, db: AsyncSession = Depends(get_async_db)):
 
 # Endpoint for user registration
 @router.post(
-    "/register/",
+    "/register",
     summary="Register a user",
     description="Registers a user with a specified user type and department.",
 )
