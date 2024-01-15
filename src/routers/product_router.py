@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import update, delete
-from src.database import get_async_db  # Adjust this import according to your project structure
+from src.database import get_async_db   
 from src.schemas.product import Product, ProductCreate, ProductUpdate
 from src.models.product import Product as DBProduct
-from src.utils.auth import get_current_user  # Ensure this is an async function if it makes DB calls
+from src.utils.auth import get_current_user  
 from src.models.user import User
 
 router = APIRouter()
@@ -22,7 +22,7 @@ async def get_all_products(db: AsyncSession = Depends(get_async_db)):
 async def create_product(
     product: ProductCreate,
     db: AsyncSession = Depends(get_async_db),
-    current_user: User = Depends(get_current_user),  # Ensure this is an async function
+    current_user: User = Depends(get_current_user)   
 ):
     new_product = DBProduct(**product.dict())
     db.add(new_product)
@@ -36,7 +36,7 @@ async def update_product(
     product_id: int,
     product_update: ProductUpdate,
     db: AsyncSession = Depends(get_async_db),
-    current_user: User = Depends(get_current_user),  # Ensure this is an async function
+    current_user: User = Depends(get_current_user)  
 ):
     stmt = update(DBProduct).where(DBProduct.id == product_id).values(**product_update.dict(exclude_unset=True))
     await db.execute(stmt)
@@ -48,7 +48,7 @@ async def update_product(
 async def delete_product(
     product_id: int,
     db: AsyncSession = Depends(get_async_db),
-    current_user: User = Depends(get_current_user),  # Ensure this is an async function
+    current_user: User = Depends(get_current_user),  
 ):
     stmt = delete(DBProduct).where(DBProduct.id == product_id)
     await db.execute(stmt)

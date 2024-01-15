@@ -1,6 +1,6 @@
-from fastapi import  FastAPI
-from src.routers import user_router 
- 
+from fastapi import FastAPI
+from src.routers import user_router
+
 app = FastAPI()
 
 
@@ -9,5 +9,4 @@ async def read_root():
     return {"Hello": "World"}
 
 
-app.include_router(user_router.router, prefix="/users") 
-
+app.include_router(user_router.router, prefix="/users")

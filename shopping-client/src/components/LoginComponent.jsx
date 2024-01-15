@@ -8,7 +8,7 @@ function LoginComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('YOUR_BACKEND_URL/login', { email, password });
+            const response = await axios.post('BACKEND_URL/login', { email, password });
             console.log(response.data);
             // Handle login success (e.g., redirect, store token)
         } catch (error) {

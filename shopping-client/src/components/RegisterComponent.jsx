@@ -10,7 +10,7 @@ function RegisterComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('YOUR_BACKEND_URL/register', { email,
+            const response = await axios.post(' BACKEND_URL/register', { email,
                 password, userType, departmentId });
                 console.log(response.data);
                 // Handle registration success

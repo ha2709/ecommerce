@@ -7,22 +7,24 @@ from src.models.customer_category import CustomerCategory
 
 router = APIRouter()
 
+
 # Define an endpoint to get the discount percentage for a specific customer and product category
 @router.get("/discount/")
 async def get_discount_percentage(
     customer_category: CustomerCategory,
     product_category: str,
-    db: AsyncSession = Depends(get_async_db)
+    db: AsyncSession = Depends(get_async_db),
 ):
     """
     Asynchronously fetch the discount for the given customer category and product category.
     """
-    result = await db.execute(select(Discount).filter_by(
-        customer_category=customer_category,
-        product_category=product_category
-    ))
+    result = await db.execute(
+        select(Discount).filter_by(
+            customer_category=customer_category, product_category=product_category
+        )
+    )
     discount = result.scalars().first()
-    
+
     if not discount:
         raise HTTPException(status_code=404, detail="Discount not found")
 

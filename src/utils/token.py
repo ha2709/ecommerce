@@ -1,6 +1,7 @@
 import secrets
 import hashlib
 
+
 def generate_verification_token():
     # Generate a random string as the token
     token = secrets.token_urlsafe(32)  # Generate a 256-bit random token

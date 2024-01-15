@@ -8,7 +8,7 @@ function VerifyEmailComponent() {
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                const response = await axios.get(`YOUR_BACKEND_URL/verify?token=${token}`);
+                const response = await axios.get(`BACKEND_URL/verify?token=${token}`);
                 console.log(response.data);
                 // Handle verification success
             } catch (error) {

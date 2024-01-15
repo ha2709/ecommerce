@@ -16,7 +16,7 @@ function AddProductComponent() {
         };
 
         try {
-            // Replace 'YOUR_BACKEND_URL' with the actual URL of your API endpoint
+           
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/products/add`, productData);
             console.log(response.data);
             // Handle success - clear form or show success message

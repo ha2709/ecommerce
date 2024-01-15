@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, APIRouter
- 
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.schemas.user import UserCreate, UserResponse
@@ -22,12 +22,14 @@ BASE_URL = os.getenv("BASE_URL")
 
 
 @router.post(
-    "/", 
+    "/",
     response_model=UserResponse,
     summary="Create a new user",
     description="Creates a new user and sends a verification email.",
 )
-async def create_user_endpoint(user: UserCreate, db: AsyncSession = Depends(get_async_db)):
+async def create_user_endpoint(
+    user: UserCreate, db: AsyncSession = Depends(get_async_db)
+):
     """
     Create a new user and send a verification email.
 
@@ -61,7 +63,7 @@ async def create_user_endpoint(user: UserCreate, db: AsyncSession = Depends(get_
 # Endpoint to handle verification (user clicks the link)
 @router.get(
     "/verify/",
-     summary="Verify user's email",
+    summary="Verify user's email",
     description="Verifies the user's email by clicking a verification link.",
 )
 async def verify_user(token: str, db: AsyncSession = Depends(get_async_db)):
@@ -73,17 +75,19 @@ async def verify_user(token: str, db: AsyncSession = Depends(get_async_db)):
     If the token is valid, it marks the email as verified in the database.
 
     Returns a success message if the email is verified.
-    """    
+    """
     # Check if the token exists in the database
     verification_link = f"{BASE_URL}/users/verify?token={token}"
     # print(48, token)
-    result = await db.execute(select(VerificationToken).filter_by(token=verification_link))
+    result = await db.execute(
+        select(VerificationToken).filter_by(token=verification_link)
+    )
     verification_token = result.scalars().first()
 
     if verification_token:
-        # Remove the token from the database (optional)
-        await db.delete(verification_token)
-        await db.commit()
+        # Remove the token from the database
+        # await db.delete(verification_token)
+        # await db.commit()
 
         # Get the email associated with the token
         email = verification_token.email
@@ -93,14 +97,18 @@ async def verify_user(token: str, db: AsyncSession = Depends(get_async_db)):
         raise HTTPException(status_code=400, detail="Invalid verification token")
 
 
-
 # Endpoint for user registration
 @router.post(
     "/register/",
     summary="Register a user",
     description="Registers a user with a specified user type and department.",
 )
-async def register_user(user: UserCreate, user_type: str, department_id: str, db: AsyncSession = Depends(get_async_db)):
+async def register_user(
+    user: UserCreate,
+    user_type: str,
+    department_id: str,
+    db: AsyncSession = Depends(get_async_db),
+):
     """
     Register a user with a specified user type and department.
 
@@ -111,7 +119,7 @@ async def register_user(user: UserCreate, user_type: str, department_id: str, db
     If the department does not exist, it returns a 400 Bad Request response.
 
     Returns a success message if the user is registered.
-    """   
+    """
     # Check if the department exists
     result = await db.execute(select(Department).filter_by(id=department_id))
     department = result.scalars().first()
@@ -123,5 +131,5 @@ async def register_user(user: UserCreate, user_type: str, department_id: str, db
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)
-    
+
     return {"message": "User registered successfully"}
