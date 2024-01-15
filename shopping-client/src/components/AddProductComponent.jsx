@@ -10,8 +10,8 @@ function AddProductComponent() {
  
         const backendURL = `${process.env.REACT_APP_BACKEND_URL}/cart/add_product`;
         const data = {
-            product_id: '83bb1d29-aaaa-49bc-babe-46e608d9a383',
-            quantity: 1
+            product_id: productId,
+            quantity: quantity
           };       // Replace with actual quantity
         const accessToken = localStorage.getItem('accessToken');
         const config = {

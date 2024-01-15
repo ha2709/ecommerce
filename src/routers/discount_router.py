@@ -6,6 +6,7 @@ from models.user import User
 from utils.auth import get_current_user
 from models.discount import Discount
 from models.customer_category import CustomerCategory
+from models.product_category import ProductCategory
 from schemas.discount import DiscountCreate, DiscountResponse
 router = APIRouter()
 
@@ -34,7 +35,7 @@ async def get_discount_percentage(
     return {"discount_percentage": discount.percentage}
 
 
-@router.post("", response_model=DiscountResponse, status_code=status.HTTP_201_CREATED)
+@router.post("")
 async def create_discount(
     discount_data: DiscountCreate, 
     db: AsyncSession = Depends(get_async_db),
@@ -43,14 +44,25 @@ async def create_discount(
     """
     Create a new discount configuration.
     """
+# Check if the product category with the given id exists
+    existing_category = await db.execute(
+        select(ProductCategory).where(ProductCategory.id == discount_data.product_category_id)
+    )
+    category = existing_category.scalar()
+
+    if category is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Product category with ID {discount_data.product_category_id} not found",
+        )
+
     new_discount = Discount(
         percentage=discount_data.percentage,
         customer_category=discount_data.customer_category,
         product_category_id=discount_data.product_category_id,
-     
     )
-    async with db as session:
-        session.add(new_discount)
-        await session.commit()
-        await session.refresh(new_discount)
-        return new_discount
+
+    db.add(new_discount)
+    await db.commit()
+    await db.refresh(new_discount)
+    return new_discount

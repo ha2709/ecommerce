@@ -10,15 +10,18 @@ function DiscountConfigComponent() {
         event.preventDefault();
         try {
             const accessToken = localStorage.getItem('accessToken');
+            const backendURL = `${process.env.REACT_APP_BACKEND_URL}/discounts`
             const discountData = {
                 customer_category: customerCategory,
                 product_category_id: productCategoryId,
                 percentage: parseFloat(percentage) / 100, // Assuming the percentage should be submitted as a decimal
             };
             
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/discounts`, discountData, {
+            const response = await axios.post(backendURL, discountData, {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    'Accept': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
                 }
             });
             console.log(response.data);
