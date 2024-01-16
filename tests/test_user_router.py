@@ -51,5 +51,5 @@ async def test_register_user():
     }
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/register/", json=register_data, headers=headers)
-    assert response.status_code == 200  # or 400 if department doesn't exist
-    # Add more assertions as needed
+    assert response.status_code == 200  #  400 if department doesn't exist
+     
