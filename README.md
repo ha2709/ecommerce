@@ -118,14 +118,18 @@ Apply the latest migration to the database:
 
 `alembic upgrade head`
 
-on browser, navigate to:
+## Accessing the Application
+### Front End:
+To view the front-end interface of the application, open your web browser and enter the following URL:
 
 `http://localhost:3000`
 
-See the documentation of Back end at :
+### Back End Documentation:
+For detailed information on the back-end APIs and their usage, please visit:
 
 `http://localhost:8000/docs`
 
+Here you will find comprehensive documentation to guide you through the back-end functionalities.
 
 ## Additional Notes
 
