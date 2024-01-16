@@ -1,74 +1,28 @@
 import os
 import pytest
 from httpx import AsyncClient
-<<<<<<< HEAD
 from main import app   
-=======
-from src.main import app  # Import your FastAPI app here
->>>>>>> main
 from dotenv import load_dotenv
 import asyncio
 
 load_dotenv()
 BASE_URL = os.getenv("BASE_URL")
-
+access_token=""
 # Define the headers to be used in the tests
 headers = {
-    'accept': 'application/json',
-    # Add other headers as needed
+    'Accept': 'application/json',
+    'Authorization': f"Bearer {access_token}",
+    'Content-Type': 'application/json'
+    
 }
 
-# @pytest.yield_fixture(scope='session')
-# def event_loop(request):
-#     """Create an instance of the default event loop for each test case."""
-#     loop = asyncio.get_event_loop_policy().new_event_loop()
-#     yield loop
-#     loop.close()
-
-# @pytest.mark.asyncio
-# async def test_create_user(event_loop):
-#     user_data = {
-#         "email": "test@example.com",
-#         "password": "password123"
-#     }
-#     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
-#         response = await ac.post("/users/", json=user_data, headers=headers)
-#     assert response.status_code == 200  # or the expected status code
-<<<<<<< HEAD
-#     
-=======
-#     # Add more assertions based on your UserResponse schema
->>>>>>> main
-
-# @pytest.mark.asyncio
-# async def test_verify_user(event_loop):
-#     test_token = "test_verification_token"
-#     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
-#         response = await ac.get(f"/users/verify/?token={test_token}", headers=headers)
-#     assert response.status_code in [200, 400]  # Depends on token validity
-
-# @pytest.mark.asyncio
-# async def test_register_user(event_loop):
-#     register_data = {
-#         "email": "newuser@example.com",
-#         "password": "newpassword123",
-#         "user_type": "customer",
-<<<<<<< HEAD
-#         "department_id": "1"  
-=======
-#         "department_id": "1"  # Adjust based on your setup
->>>>>>> main
-#     }
-#     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
-#         response = await ac.post("/users/register/", json=register_data, headers=headers)
-#     assert response.status_code == 200  # or 400 if department doesn't exist
-<<<<<<< HEAD
-    
-=======
-    # Add more assertions as needed
->>>>>>> main
-
-
+@pytest.yield_fixture(scope='session')
+def event_loop(request):
+    """Create an instance of the default event loop for each test case."""
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+ 
 @pytest.mark.asyncio
 async def test_create_user():
     user_data = {
@@ -78,11 +32,7 @@ async def test_create_user():
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/", json=user_data, headers=headers)
     assert response.status_code == 200  # or the expected status code
-<<<<<<< HEAD
    
-=======
-    # Add more assertions based on your UserResponse schema
->>>>>>> main
 
 @pytest.mark.asyncio
 async def test_verify_user():
@@ -97,11 +47,7 @@ async def test_register_user():
         "email": "newuser@example.com",
         "password": "newpassword123",
         "user_type": "customer",
-<<<<<<< HEAD
         "department_id": "1"   
-=======
-        "department_id": "1"  # Adjust based on your setup
->>>>>>> main
     }
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/register/", json=register_data, headers=headers)

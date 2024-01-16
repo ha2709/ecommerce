@@ -118,6 +118,22 @@ Apply the latest migration to the database:
 
 `alembic upgrade head`
 
+## Accessing the Application
+### Front End:
+To view the front-end interface of the application, open your web browser and enter the following URL:
+
+`http://localhost:3000`
+
+### Back End Documentation:
+For detailed information on the back-end APIs and their usage, please visit:
+
+`http://localhost:8000/docs`
+
+Here you will find comprehensive documentation to guide you through the back-end functionalities.
+
+
+[Demo Video](https://drive.google.com/file/d/1KbtAUKTSXvT8A_btYOQmQTYnDOrU310_/view?usp=sharing)
+
 ## Additional Notes
 
 - Ensure all Docker services are running smoothly before proceeding with database migrations.
