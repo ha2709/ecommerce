@@ -131,6 +131,9 @@ For detailed information on the back-end APIs and their usage, please visit:
 
 Here you will find comprehensive documentation to guide you through the back-end functionalities.
 
+
+[Demo Video](https://drive.google.com/file/d/1KbtAUKTSXvT8A_btYOQmQTYnDOrU310_/view?usp=sharing)
+
 ## Additional Notes
 
 - Ensure all Docker services are running smoothly before proceeding with database migrations.
