@@ -118,6 +118,15 @@ Apply the latest migration to the database:
 
 `alembic upgrade head`
 
+on browser, navigate to:
+
+`http://localhost:3000`
+
+See the documentation of Back end at :
+
+`http://localhost:8000/docs`
+
+
 ## Additional Notes
 
 - Ensure all Docker services are running smoothly before proceeding with database migrations.
