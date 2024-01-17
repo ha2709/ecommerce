@@ -2,11 +2,13 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.daily import DailyTrigger  # You can choose other triggers like WeeklyTrigger
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
+from src.database import get_async_db
+from src.services.categorize_customer import categorize_customers
 import atexit
 
 scheduler = BackgroundScheduler()
 jobstore = {
-    'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')  # Replace with your database URL
+    'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')  
 }
 executors = {
     'default': ThreadPoolExecutor(20),

@@ -50,7 +50,7 @@ headers = {
 #     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
 #         response = await ac.post("/users/register/", json=register_data, headers=headers)
 #     assert response.status_code == 200  # or 400 if department doesn't exist
-# Add more assertions as needed
+ 
 
 
 @pytest.mark.asyncio
@@ -59,7 +59,7 @@ async def test_create_user():
     async with AsyncClient(app=app, base_url=BASE_URL) as ac:
         response = await ac.post("/users/", json=user_data, headers=headers)
     assert response.status_code == 200  # or the expected status code
-    # Add more assertions based on your UserResponse schema
+   
 
 
 @pytest.mark.asyncio
@@ -83,4 +83,4 @@ async def test_register_user():
             "/users/register/", json=register_data, headers=headers
         )
     assert response.status_code == 200  # or 400 if department doesn't exist
-    # Add more assertions as needed
+ 

@@ -7,7 +7,7 @@ from models.customer import Customer
 from models.discount import Discount
 from models.product_category import ProductCategory
 from schemas.order import OrderItemCreate
-from database import get_async_db  # Adjust this import according to your project structure
+from database import get_async_db 
 
 async def calculate_total_price(
     order_items: List[OrderItemCreate], 
