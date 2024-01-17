@@ -25,7 +25,7 @@ class Discount(Base):
     # Discount percentage (e.g., 10% discount as 0.10)
     percentage = Column(Float, nullable=False)
 
-    # Define a relationship with the Product model (assuming a one-to-many relationship)
+    # Define a relationship with the Product model ( a one-to-many relationship)
     products = relationship("Product", back_populates="discount")
 
     # Define a relationship with the ProductCategory model

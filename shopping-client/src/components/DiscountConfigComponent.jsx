@@ -14,7 +14,7 @@ function DiscountConfigComponent() {
             const discountData = {
                 customer_category: customerCategory,
                 product_category_id: productCategoryId,
-                percentage: parseFloat(percentage) / 100, // Assuming the percentage should be submitted as a decimal
+                percentage: parseFloat(percentage) / 100, //  the percentage should be submitted as a decimal
             };
             
             const response = await axios.post(backendURL, discountData, {
