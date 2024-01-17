@@ -131,6 +131,17 @@ For detailed information on the back-end APIs and their usage, please visit:
 
 Here you will find comprehensive documentation to guide you through the back-end functionalities.
 
+### Running Test Scripts
+
+To execute the test scripts for this project, please follow these steps:
+
+- Navigate to the project's root directory.
+
+- Run the following command:
+
+`pytest -v`
+
+This will initiate the pytest framework in verbose mode, providing detailed output for each test executed.
 
 [Demo Video](https://drive.google.com/file/d/1KbtAUKTSXvT8A_btYOQmQTYnDOrU310_/view?usp=sharing)
 
