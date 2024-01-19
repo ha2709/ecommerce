@@ -8,6 +8,7 @@ from sqlalchemy.future import select
 # Create a password context instance
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
     """
     Asynchronously create a new user in the database.
@@ -21,7 +22,7 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
     """
     # Hash the user password
     hashed_password = pwd_context.hash(user.password)
-    
+
     # Create a new user instance
     db_user = UserModel(email=user.email, hashed_password=hashed_password)
 
@@ -34,7 +35,6 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
 
 
 async def authenticate_user(email: str, password: str, db: AsyncSession):
-    
     result = await db.execute(select(UserModel).filter(UserModel.email == email))
     user = result.scalars().first()
     if not user:
@@ -43,6 +43,6 @@ async def authenticate_user(email: str, password: str, db: AsyncSession):
         return False
     return user
 
+
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
-

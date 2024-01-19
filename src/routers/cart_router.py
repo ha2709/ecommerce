@@ -11,15 +11,12 @@ from schemas.shopping_cart import (
 )
 from models.user import User
 from utils.auth import get_current_user
- 
+
 router = APIRouter()
 
- 
 
 # Get Shopping Cart
-@router.get(
-    "", response_model=ShoppingCart, summary="Get the shopping cart"
-)
+@router.get("", response_model=ShoppingCart, summary="Get the shopping cart")
 async def get_shopping_cart(
     db: AsyncSession = Depends(get_async_db),
     current_user: User = Depends(get_current_user),
@@ -37,13 +34,9 @@ async def get_shopping_cart(
 
     return db_shopping_cart
 
- 
- 
+
 # Add Product to Shopping Cart
-@router.post(
-    "/add_product", 
-    summary="Add a product to the shopping cart"
-)
+@router.post("/add_product", summary="Add a product to the shopping cart")
 async def add_product_to_shopping_cart(
     item: ShoppingCartItemCreate,
     db: AsyncSession = Depends(get_async_db),
@@ -53,26 +46,31 @@ async def add_product_to_shopping_cart(
     # Asynchronously add a product to the shopping cart for the current user.
     # """
 
-    result = await db.execute(select(DBShoppingCart).filter_by(product_id=item.product_id))
+    result = await db.execute(
+        select(DBShoppingCart).filter_by(product_id=item.product_id)
+    )
     db_shopping_cart = result.scalars().first()
 
     if not db_shopping_cart:
         raise HTTPException(status_code=404, detail="Shopping cart not found")
 
-    existing_item = next((i for i in db_shopping_cart.items if i.product_id == item.product_id), None)
+    existing_item = next(
+        (i for i in db_shopping_cart.items if i.product_id == item.product_id), None
+    )
 
     if existing_item:
         existing_item.quantity += item.quantity
     else:
-        db_shopping_cart.items.append(ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart))
+        db_shopping_cart.items.append(
+            ShoppingCartItem(**item.dict(), shopping_cart=db_shopping_cart)
+        )
 
     await db.commit()
     return {"message": "Product added to the shopping cart successfully"}
 
+
 # Remove Product from Shopping Cart
-@router.post(
-    "/remove_product", summary="Remove a product from the shopping cart"
-)
+@router.post("/remove_product", summary="Remove a product from the shopping cart")
 async def remove_product_from_shopping_cart(
     item: ShoppingCartItemUpdate,
     db: AsyncSession = Depends(get_async_db),

@@ -16,6 +16,8 @@ engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionFactory = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+
 # Dependency to get the database session
 async def get_async_db():
     async with AsyncSessionFactory() as session:
@@ -32,6 +34,7 @@ from models.order import Order
 from models.shopping_cart_item import ShoppingCartItem
 from models.verfication_token import VerificationToken
 from models.order_product import OrderProduct
+
 # from models.association import association_table
 from models.customer import Customer
 from models.discount import Discount

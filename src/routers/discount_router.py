@@ -8,6 +8,7 @@ from models.discount import Discount
 from models.customer_category import CustomerCategory
 from models.product_category import ProductCategory
 from schemas.discount import DiscountCreate, DiscountResponse
+
 router = APIRouter()
 
 
@@ -37,16 +38,18 @@ async def get_discount_percentage(
 
 @router.post("")
 async def create_discount(
-    discount_data: DiscountCreate, 
+    discount_data: DiscountCreate,
     db: AsyncSession = Depends(get_async_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     """
     Create a new discount configuration.
     """
-# Check if the product category with the given id exists
+    # Check if the product category with the given id exists
     existing_category = await db.execute(
-        select(ProductCategory).where(ProductCategory.id == discount_data.product_category_id)
+        select(ProductCategory).where(
+            ProductCategory.id == discount_data.product_category_id
+        )
     )
     category = existing_category.scalar()
 

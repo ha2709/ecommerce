@@ -19,6 +19,8 @@ load_dotenv()
 
 
 BASE_URL = os.getenv("BASE_URL")
+
+
 @router.post(
     "",
     response_model=UserResponse,

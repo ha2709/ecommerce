@@ -9,6 +9,7 @@ from sqlalchemy.future import select
 from database import get_async_db
 from models.user import User
 from datetime import datetime, timedelta
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -37,7 +38,7 @@ async def get_current_user(
     """
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-       
+
         user_email: str = payload.get("sub")
         print(42, user_email)
         if user_email is None:
@@ -51,17 +52,18 @@ async def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
         )
-   
+
     result = await db.execute(select(User).filter(User.email == token_data["sub"]))
-     
+
     user = result.scalars().first()
-    
+
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found"
         )
 
     return user
+
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()

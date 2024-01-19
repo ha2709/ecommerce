@@ -4,7 +4,7 @@ from pydantic import BaseModel, UUID4, Field
 
 class ShoppingCartBase(BaseModel):
     product_id: UUID4
-    quantity: int  
+    quantity: int
 
 
 class ShoppingCartItemCreate(ShoppingCartBase):

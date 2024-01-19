@@ -1,8 +1,9 @@
-from sqlalchemy import Column,ForeignKey
+from sqlalchemy import Column, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from sqlalchemy.orm import relationship
 from models.base import Base
+
 
 class ShoppingCart(Base):
     __tablename__ = "shopping_cart"
@@ -14,8 +15,6 @@ class ShoppingCart(Base):
         unique=True,
         nullable=False,
     )
- 
-    product_id = Column(
-        UUID(as_uuid=True), ForeignKey("products.id")
-    )
+
+    product_id = Column(UUID(as_uuid=True), ForeignKey("products.id"))
     items = relationship("ShoppingCartItem", back_populates="shopping_cart")

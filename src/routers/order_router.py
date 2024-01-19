@@ -43,9 +43,7 @@ async def place_order(
     return db_order
 
 
-@router.get(
-    "/history/", response_model=List[Order], summary="Fetch order history"
-)
+@router.get("/history/", response_model=List[Order], summary="Fetch order history")
 async def fetch_order_history(
     db: AsyncSession = Depends(get_async_db),
     current_user: Customer = Depends(get_current_user),

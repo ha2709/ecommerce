@@ -4,20 +4,22 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from  models.user import User
-from  models.base import Base
+from models.user import User
+from models.base import Base
 from models.department import Department
 from models.order import Order
 from models.product import Product
 from models.shopping_cart_item import ShoppingCartItem
 from models.verfication_token import VerificationToken
 from models.order_product import OrderProduct
+
 # from models.association import association_table
 from models.customer import Customer
 from models.discount import Discount
 from models.order_item import OrderItem
 from models.product_category import ProductCategory
 from models.shopping_cart import ShoppingCart
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -77,9 +79,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
