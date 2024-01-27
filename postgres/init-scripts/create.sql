@@ -2,12 +2,13 @@
 CREATE SCHEMA IF NOT EXISTS public;
 
 -- Create the customercategory ENUM type
-CREATE TYPE IF NOT EXISTS public.customercategory AS ENUM (
-    'BRONZE',
-    'SILVER',
-    'GOLD'
-);
-
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'customercategory') THEN
+        CREATE TYPE public.customercategory AS ENUM ('BRONZE', 'SILVER', 'GOLD');
+    END IF;
+END
+$$;
 -- Create the alembic_version table
 CREATE TABLE IF NOT EXISTS public.alembic_version (
     version_num character varying(32) NOT NULL
