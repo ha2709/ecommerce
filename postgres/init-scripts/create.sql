@@ -9,7 +9,6 @@ BEGIN
     END IF;
 END
 $$;
-
 -- Create the alembic_version table
 CREATE TABLE IF NOT EXISTS public.alembic_version (
     version_num character varying(32) NOT NULL

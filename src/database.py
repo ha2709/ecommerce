@@ -6,13 +6,15 @@ import os
 from dotenv import load_dotenv
 from models.verfication_token import VerificationToken
 import asyncio
-
+from sqlalchemy.pool import NullPool
 load_dotenv()
 # DATABASE_URL = "postgresql://admin:1234@localhost/pinchi"
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL"
+    )
 print(12, DATABASE_URL)
 # engine = create_engine(DATABASE_URL)
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(DATABASE_URL, echo=True,   poolclass=NullPool)
 AsyncSessionFactory = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
